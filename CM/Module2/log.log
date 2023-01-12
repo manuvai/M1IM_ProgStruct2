@@ -1,0 +1,10 @@
+info
+Ceci sera loggé!
+info
+info
+info
+2023-01-10 15:07:40,977 - root - 5 - INFO - info
+saisie utilisateur: [12]
+2023-01-10 15:08:15,865 - root - 15 - INFO - saisie utilisateur: [12]
+Date < 1928 ou > 2016 :  [12]
+2023-01-10 15:08:15,867 - root - 23 - ERROR - Date < 1928 ou > 2016 :  [12]
