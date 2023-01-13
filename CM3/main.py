@@ -267,7 +267,7 @@ def create_film(data_dict: dict) -> dict:
         }
     }
 
-def pourcentage_meilleurs_films_avec_award(films: list) -> float:
+def pourcentage_meilleurs_films_avec_award(films: dict) -> float:
     """Récupération du pourcentage de meilleurs films par rapport aux films ayant recu un prix
 
     Args:
@@ -278,8 +278,8 @@ def pourcentage_meilleurs_films_avec_award(films: list) -> float:
     """
     bests = meilleurs_films(films)
     bests_awarded = meilleurs_films_awarded(films)
-    nb_bests = len(bests)
-    nb_bests_awarded = len(bests_awarded)
+    nb_bests = len(bests.keys())
+    nb_bests_awarded = len(bests_awarded.keys())
 
     return nb_bests_awarded / nb_bests
 
@@ -310,6 +310,6 @@ if (__name__ == '__main__'):
     print(meilleurs_films(films))
     print(films_awarded(films))
     print(meilleurs_films_awarded(films))
-    # print("Le pourcentage de meilleurs films ayant reçu un prix est de {} %".format(pourcentage_meilleurs_films_avec_award(films) * 100))
+    print("Le pourcentage de meilleurs films ayant reçu un prix est de {} %".format(pourcentage_meilleurs_films_avec_award(films) * 100))
     
 
