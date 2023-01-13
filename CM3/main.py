@@ -11,7 +11,7 @@ def get_data(csv_file_path: str) -> dict:
         csv_file_path (str): Le chemin vers le fichier CSV
 
     Returns:
-        list: La liste des films
+        dict: La liste des films
     """
     lines = get_file_lines(csv_file_path)
     
@@ -75,10 +75,10 @@ def meilleurs_films(films: dict) -> dict:
     """Récupération des films ayant recu la meilleure popularité
 
     Args:
-        films (list): La liste des films
+        films (dict): La liste des films
 
     Returns:
-        list: La liste des meilleurs films
+        dict: La liste des meilleurs films
     """
     best_film = meilleur_film(films)
     best_film_dict = film_to_dict(best_film)
@@ -115,7 +115,7 @@ def meilleur_film(films: dict) -> dict:
     """Récupération du film ayant reçu le plus de popu
 
     Args:
-        films (list): La liste des films
+        films (dict): La liste des films
 
     Returns:
         dict: Le meilleur film
@@ -153,10 +153,10 @@ def films_awarded(films: dict) -> dict:
     """Récupération de la liste des films ayant recu un prix
 
     Args:
-        films (list): La liste des films
+        films (dict): La liste des films
 
     Returns:
-        list: La liste des films ayant recu un prix
+        dict: La liste des films ayant recu un prix
     """
     films_filtres = {}
 
@@ -171,10 +171,10 @@ def meilleurs_films_awarded(films: dict) -> dict:
     """Récupération de la liste des meilleurs films ayant recu un prix
 
     Args:
-        films (list): La liste des films
+        films (dict): La liste des films
 
     Returns:
-        list: La liste des meilleurs films ayant recu un prix
+        dict: La liste des meilleurs films ayant recu un prix
     """
 
     films = films_awarded(films)
@@ -271,7 +271,7 @@ def pourcentage_meilleurs_films_avec_award(films: dict) -> float:
     """Récupération du pourcentage de meilleurs films par rapport aux films ayant recu un prix
 
     Args:
-        films (list): Liste de films
+        films (dict): Liste de films
 
     Returns:
         float: Pourcentage (0 <= x <= 1)
