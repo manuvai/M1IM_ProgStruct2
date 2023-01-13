@@ -71,7 +71,7 @@ def film_par_annee(annee: int, data: dict):
     filename = 'film-{}.csv'.format(str(annee))
     write_films_csv(films_filtres, filename)
 
-def meilleurs_films(films: list) -> list:
+def meilleurs_films(films: dict) -> dict:
     """Récupération des films ayant recu la meilleure popularité
 
     Args:
@@ -83,9 +83,13 @@ def meilleurs_films(films: list) -> list:
     best_film = meilleur_film(films)
     best_film_dict = film_to_dict(best_film)
 
-    best_films = [best_film]
-    for film in films:
-        film_dict = film_to_dict(film)
+    best_index = list(best_film.keys())[0]
+    best_films = {}
+    best_films[best_index] = best_film
+    for titre, donnees_film in films.items():
+        film_dict = film_to_dict({
+            titre: donnees_film
+        })
 
         film_pop = 0
         
@@ -101,11 +105,13 @@ def meilleurs_films(films: list) -> list:
         bol_meme_film = best_film_dict['Title'] == film_dict['Title']
 
         if (bol_popu_egale and not bol_meme_film):
-            best_films.append(film)
+            best_films.update({
+            titre: donnees_film
+        })
     
     return best_films
     
-def meilleur_film(films: list) -> dict:
+def meilleur_film(films: dict) -> dict:
     """Récupération du film ayant reçu le plus de popu
 
     Args:
@@ -114,11 +120,15 @@ def meilleur_film(films: list) -> dict:
     Returns:
         dict: Le meilleur film
     """
-    best_index = 0
-    best_film = film_to_dict(films[best_index])
+    best_index = list(films.keys())[0]
+    best_film = film_to_dict({
+            best_index: films[best_index],
+        })
 
-    for i in range(1, len(films)):
-        film = film_to_dict(films[i])
+    for titre, data_film in films.items():
+        film = film_to_dict({
+            titre: data_film,
+        })
         film_pop = 0
         
         if (len(film['Popularity']) > 0):
@@ -130,10 +140,14 @@ def meilleur_film(films: list) -> dict:
             best_film_pop = int(best_film['Popularity'])
 
         if (film_pop > best_film_pop):
-            best_index = i
-            best_film = film_to_dict(films[best_index])
+            best_index = titre
+            best_film = film_to_dict({
+            best_index: films[best_index],
+        })
 
-    return films[best_index]
+    return {
+        best_index: films[best_index],
+    }
 
 def films_awarded(films: list) -> list:
     """Récupération de la liste des films ayant recu un prix
@@ -291,7 +305,8 @@ if (__name__ == '__main__'):
     films = get_data('./film.csv')
     print(films)
     print(film_par_annee(1990, films))
-    # print(meilleurs_films(films))
+    print(meilleur_film(films))
+    print(meilleurs_films(films))
     # print(films_awarded(films))
     # print(meilleurs_films_awarded(films))
     # print("Le pourcentage de meilleurs films ayant reçu un prix est de {} %".format(pourcentage_meilleurs_films_avec_award(films) * 100))
