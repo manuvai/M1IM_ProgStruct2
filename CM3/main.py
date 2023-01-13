@@ -56,20 +56,18 @@ def get_file_lines(csv_file_path: str) -> list:
 
     return response
 
-def film_par_annee(annee: int, data: list):
+def film_par_annee(annee: int, data: dict):
     """Implémentation du tri des films ayant été parus la même année et écriture dans un fichier
 
     Args:
         annee (int): Année donnée
-        data (list): Liste des films
+        data (dict): Liste des films
     """
-    films_filtres = []
+    films_filtres = {}
 
-    for film in data:
-        for titre, data_film in film.items():
-            if (data_film['Year'] == str(annee)):
-                films_filtres.append(film)
-
+    for titre, data_film in data.items():
+        if (data_film['Year'] == str(annee)):
+            films_filtres[titre] = data_film
     filename = 'film-{}.csv'.format(str(annee))
     write_films_csv(films_filtres, filename)
 
@@ -211,21 +209,25 @@ def film_to_line(film: dict) -> str:
 
     return ";".join(temp_list)
 
-def write_films_csv(films: list, filename: str):
+def write_films_csv(films: dict, filename: str):
     """Implémentation de l'écriture d'une liste de films dans un fichier
 
     Args:
-        films (list): Liste des films
+        films (dict): Liste des films
         filename (str): Nom du fichier
     """
     with open(filename, mode='w+') as file:
         file.write("Year;Length;Title;Subject;Main Actor;Main Actress;Director;Popularity;Awards")
 
-    for film in films:
+    for titre, data_film in films.items():
+
+        film = {
+            titre: data_film
+        }
         line = film_to_line(film)
 
         with open(filename, mode='a+') as file:
-            file.write(line)
+            file.write("\n" + line)
 
 
 def create_film(data_dict: dict) -> dict:
@@ -288,7 +290,7 @@ def create_dict(line: str, keys: list) -> dict:
 if (__name__ == '__main__'):
     films = get_data('./film.csv')
     print(films)
-    # print(film_par_annee(1990, films))
+    print(film_par_annee(1990, films))
     # print(meilleurs_films(films))
     # print(films_awarded(films))
     # print(meilleurs_films_awarded(films))
