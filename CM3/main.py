@@ -149,7 +149,7 @@ def meilleur_film(films: dict) -> dict:
         best_index: films[best_index],
     }
 
-def films_awarded(films: list) -> list:
+def films_awarded(films: dict) -> dict:
     """Récupération de la liste des films ayant recu un prix
 
     Args:
@@ -158,12 +158,13 @@ def films_awarded(films: list) -> list:
     Returns:
         list: La liste des films ayant recu un prix
     """
-    films_filtres = []
+    films_filtres = {}
 
-    for film in films:
-        for titre, data_film in film.items():
-            if (data_film['Awards'] == 'Yes'):
-                films_filtres.append(film)
+    for titre, data_film in films.items():
+        if (data_film['Awards'] == 'Yes'):
+            films_filtres.update({
+                titre: data_film
+            })
     return films_filtres
     
 def meilleurs_films_awarded(films: list) -> dict:
@@ -307,7 +308,7 @@ if (__name__ == '__main__'):
     print(film_par_annee(1990, films))
     print(meilleur_film(films))
     print(meilleurs_films(films))
-    # print(films_awarded(films))
+    print(films_awarded(films))
     # print(meilleurs_films_awarded(films))
     # print("Le pourcentage de meilleurs films ayant reçu un prix est de {} %".format(pourcentage_meilleurs_films_avec_award(films) * 100))
     
