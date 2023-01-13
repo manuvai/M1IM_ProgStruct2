@@ -167,7 +167,7 @@ def films_awarded(films: dict) -> dict:
             })
     return films_filtres
     
-def meilleurs_films_awarded(films: list) -> dict:
+def meilleurs_films_awarded(films: dict) -> dict:
     """Récupération de la liste des meilleurs films ayant recu un prix
 
     Args:
@@ -309,7 +309,7 @@ if (__name__ == '__main__'):
     print(meilleur_film(films))
     print(meilleurs_films(films))
     print(films_awarded(films))
-    # print(meilleurs_films_awarded(films))
+    print(meilleurs_films_awarded(films))
     # print("Le pourcentage de meilleurs films ayant reçu un prix est de {} %".format(pourcentage_meilleurs_films_avec_award(films) * 100))
     
 
