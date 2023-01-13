@@ -4,7 +4,7 @@
 
 import os
 
-def get_data(csv_file_path: str) -> list:
+def get_data(csv_file_path: str) -> dict:
     """Implémentation de la récupération des films
 
     Args:
@@ -17,10 +17,11 @@ def get_data(csv_file_path: str) -> list:
     
     keys = get_csv_keys(lines)
 
-    liste_films = []
+    liste_films = {}
     for i in range(1, len(lines)):
         data_dict = create_dict(lines[i], keys)
-        liste_films.append(create_film(data_dict))
+        film = create_film(data_dict)
+        liste_films.update(film)
 
     return liste_films
 
@@ -285,17 +286,12 @@ def create_dict(line: str, keys: list) -> dict:
     return data
 
 if (__name__ == '__main__'):
-    # films = get_data('./film.csv')
-    # #print(films)
+    films = get_data('./film.csv')
+    print(films)
     # print(film_par_annee(1990, films))
     # print(meilleurs_films(films))
     # print(films_awarded(films))
     # print(meilleurs_films_awarded(films))
     # print("Le pourcentage de meilleurs films ayant reçu un prix est de {} %".format(pourcentage_meilleurs_films_avec_award(films) * 100))
-    path = '.'
-
     
-    files = os.listdir(path)
-    for name in files:
-        print(name)
 
