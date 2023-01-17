@@ -46,7 +46,7 @@ def get_file_lines(csv_file_path: str) -> list:
         list: La liste des lignes
     """
     
-    with open(csv_file_path, encoding='ISO-8859-1') as file:
+    with open(csv_file_path, encoding='ISO-8859-1', mode='r') as file:
         lines = file.readlines()
     
     response = []
@@ -231,7 +231,7 @@ def write_films_csv(films: dict, filename: str):
         films (dict): Liste des films
         filename (str): Nom du fichier
     """
-    with open(filename, mode='w+') as file:
+    with open(filename, encoding='utf-8', mode='w+') as file:
         file.write("Year;Length;Title;Subject;Main Actor;Main Actress;Director;Popularity;Awards")
 
     for titre, data_film in films.items():
@@ -241,7 +241,7 @@ def write_films_csv(films: dict, filename: str):
         }
         line = film_to_line(film)
 
-        with open(filename, encoding='ISO-8859-1', mode='a+') as file:
+        with open(filename, encoding='utf-8', mode='a+') as file:
             file.write("\n" + line)
 
 
