@@ -46,7 +46,7 @@ def get_file_lines(csv_file_path: str) -> list:
         list: La liste des lignes
     """
     
-    with open(csv_file_path) as file:
+    with open(csv_file_path, encoding='ISO-8859-1') as file:
         lines = file.readlines()
     
     response = []
@@ -241,7 +241,7 @@ def write_films_csv(films: dict, filename: str):
         }
         line = film_to_line(film)
 
-        with open(filename, mode='a+') as file:
+        with open(filename, encoding='ISO-8859-1', mode='a+') as file:
             file.write("\n" + line)
 
 
@@ -305,11 +305,10 @@ def create_dict(line: str, keys: list) -> dict:
 if (__name__ == '__main__'):
     films = get_data('./film.csv')
     print(films)
-    print(film_par_annee(1990, films))
-    print(meilleur_film(films))
-    print(meilleurs_films(films))
-    print(films_awarded(films))
-    print(meilleurs_films_awarded(films))
+    film_par_annee(1990, films)
+    print("Les meilleurs films sont :\n " + str(meilleur_film(films)))
+    print("Les films ayant recu une récompense sont :\n " + str(films_awarded(films)))
+    print("Les meilleurs films ayant recu une récompense sont :\n " + str(meilleurs_films_awarded(films)))
     print("Le pourcentage de meilleurs films ayant reçu un prix est de {} %".format(pourcentage_meilleurs_films_avec_award(films) * 100))
     
 
