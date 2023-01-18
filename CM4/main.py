@@ -84,6 +84,26 @@ def get_sum_by_key(data: list, key: str) -> int:
     
     return count
 
+def search_by_coordinates(lat: float, lon: float, data: list) -> dict:
+    """Recherche à partir d'un nom de station
+
+    Args:
+        lat (float): La latitude de la position
+        lon (float): La longitude de la position
+        data (list): La liste des stations
+
+    Returns:
+        dict: La station trouvée
+    """
+    for station in data:
+
+        bol_equals_lat = lat == station['position']['lat']
+        bol_equals_lon = lon == station['position']['lon']
+
+        if (bol_equals_lat and bol_equals_lon):
+            return station
+    
+    return None
 
 if __name__ == '__main__':
     url = 'https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/api-velo-toulouse-temps-reel/exports/json?lang=fr&timezone=Europe%2FParis'
@@ -107,3 +127,10 @@ if __name__ == '__main__':
     print("Le nombre total de vélos disponibles actuellement (« Available Bikes ») est de : {}".format(nb_bike_availables))
     print(" Le nombre total de place disponibles pour déposer un vélo (Available Bike Stands) est de : {}".format(nb_bike_stands_availables))
     print("Le nombre total de « bike stands » est de : {}".format(nb_bike_stands))
+
+    # Question 3
+    lat = 43.59468
+    lon = 1.44938
+
+    station_searched = search_by_coordinates(lat, lon, stations)
+    print("La station située à ({}, {}) est : '{}'".format(lat, lon, station_searched['name']))
