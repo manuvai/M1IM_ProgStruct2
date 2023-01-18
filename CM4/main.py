@@ -109,7 +109,7 @@ if __name__ == '__main__':
     url = 'https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/api-velo-toulouse-temps-reel/exports/json?lang=fr&timezone=Europe%2FParis'
     stations = get_web_data(url)
 
-    # Question 1
+    print("\n# Question 1")
     station_name = '00084 - BRIENNE - MANUFACTURE'
     station_searched = search_by_name(station_name, stations)
 
@@ -119,16 +119,16 @@ if __name__ == '__main__':
         print("Le nombre de vélos disponibles à la station '{}' est de {}".format(station_name, station_searched['available_bikes']))
         print("Le nombre de places disponibles à la station '{}' est de {}".format(station_name, station_searched['available_bike_stands']))
 
-    # Question 2
+    print("\n# Question 2")
     nb_bike_availables = get_nb_bike_availables(stations)
     nb_bike_stands_availables = get_nb_bike_stands_availables(stations)
     nb_bike_stands = get_nb_bike_stands(stations)
     
     print("Le nombre total de vélos disponibles actuellement (« Available Bikes ») est de : {}".format(nb_bike_availables))
-    print(" Le nombre total de place disponibles pour déposer un vélo (Available Bike Stands) est de : {}".format(nb_bike_stands_availables))
+    print("Le nombre total de place disponibles pour déposer un vélo (Available Bike Stands) est de : {}".format(nb_bike_stands_availables))
     print("Le nombre total de « bike stands » est de : {}".format(nb_bike_stands))
 
-    # Question 3
+    print("\n# Question 3")
     lat = 43.59468
     lon = 1.44938
 
