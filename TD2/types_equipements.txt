@@ -1,0 +1,24 @@
+nom:valeur
+Terrain:60
+Gymnase:31
+Patinoire, piscine:1
+Plateau multisports extérieur:21
+Boulodrome:64
+Dojo:2
+City stade:5
+Salle:6
+Patinoire:1
+City-Stade:4
+Tennis:4
+Piscine:11
+Skate-park:1
+Base nautique:3
+Fronton:1
+Terrain sable:1
+bi-cross, skate-park:1
+Salle polyvalente:1
+Multisports:4
+bi-cross:1
+Skate-Park:2
+Piste:2
+Salle rdc:1
